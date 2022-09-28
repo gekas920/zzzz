@@ -1,0 +1,31 @@
+.navbar{
+    grid-column: col / span 4;
+    height: 5rem;
+    display: flex;
+    border-bottom: 4px solid #d9d6d5;
+}
+
+.navbar-list{
+    width: 60%;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-user-container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 40%;
+}
+
+.navbar-user-icon{
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 3rem;
+}
+
+.navbar-text-input-container{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
