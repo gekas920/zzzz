@@ -1,46 +1,48 @@
-import React, { useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import './navbar.css';
-import NavbarButton from './NavbarButton';
-import Logo from './Logo';
-import { AiOutlineUser } from 'react-icons/ai';
-import TextInput from '../../ui-components/TextInput';
-import Button from '../../ui-components/Button';
 import { observer } from 'mobx-react-lite';
-import Store from '../../Store/store';
+// @ts-expect-error
+import logo from '../../images/adidas-4-logo.png'
+import Store from "../../Store/store";
+
 
 const Navbar = (): JSX.Element => {
-  const [value, setValue] = useState('');
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setValue(e.target.value);
-  };
-  const handleClick = (): void => {
-    Store.addItem(value);
-    setValue('');
-  };
+    const [value,setValue] = useState('');
+    const onKeyDown = useCallback((event: KeyboardEvent):void=>{
+        if(event.key === 'Enter'){
+            const input = document.getElementById('text-input') as HTMLInputElement;
+            Store.addItem(input.value);
+            input.value = '';
+        }
+    },[value])
+    useEffect(() => {
+        const input = document.getElementById('text-input');
+        input?.addEventListener("keydown", onKeyDown)
+    },[])
   return (
     <div className="navbar">
-      <Logo />
-      <div className="navbar-list">
-        <NavbarButton text="Lorem" />
-        <NavbarButton text="Ipsum" />
-        <NavbarButton text="Dolor" />
-        <NavbarButton text="Sit" />
-        <NavbarButton text="Amet" />
-      </div>
-      <div className="navbar-text-input-container">
-        <TextInput onChange={handleChange} value={value} />
-        <Button
-          onClick={handleClick}
-          style={{
-            height: '1.5rem',
-          }}
-        >
-          Add
-        </Button>
-      </div>
-      <div className="navbar-user-container">
-        <AiOutlineUser className="navbar-user-icon" />
-      </div>
+        <div className='navbar-top'>
+            <span className='navbar-top__location'>Воронеж</span>
+            <div className='navbar-top__list'>
+                <span>Магазины</span>
+                <span>Покупателям</span>
+                <span>Юридическим лицам</span>
+                <span>Клуб DNS</span>
+            </div>
+            <span className='navbar-top__phone'>8(800)555-35-35</span>
+        </div>
+        <div className='navbar_bottom'>
+            <img src={logo} alt='logo' className='navbar_bottom__logo'/>
+            <input id='text-input' type='search' className='navbar_bottom__input'
+                   placeholder='Поиск по сайту'
+                   onChange={(e)=>setValue(e.target.value)} />
+            <div className='navbar_bottom__list'>
+                <span>Сравнить</span>
+                <span>Избранное</span>
+                <span>Корзина</span>
+                <span>Войти</span>
+            </div>
+        </div>
     </div>
   );
 };

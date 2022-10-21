@@ -1,31 +1,73 @@
 .navbar{
     grid-column: col / span 4;
     height: 5rem;
-    display: flex;
     border-bottom: 4px solid #d9d6d5;
 }
-
-.navbar-list{
-    width: 60%;
+.navbar-top{
     display: flex;
+    justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 2rem;
+    background-color:#fc8507;
+    border: none;
+    color: #fff;
+    font-size: 14px;
 }
 
-.navbar-user-container{
+.navbar-top__location{
+    flex-grow:1;
+    padding-left: 5rem;
+}
+.navbar-top__list{
+    flex-grow:1;
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    width: 40%;
+    gap: 1rem;
+    padding-left: 5rem;
+}
+.navbar-top__phone{
+    flex-grow:1;
+    padding-left: 5rem;
+    font-weight: bold;
 }
 
-.navbar-user-icon{
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-right: 3rem;
-}
 
-.navbar-text-input-container{
+.navbar_bottom{
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+}
+
+.navbar_bottom__logo{
+    margin-left: 5rem;
+    width: 3rem;
+    height: 3rem;
+    margin-right: 20rem;
+}
+
+.navbar_bottom__input{
+    width:20rem;
+    border:none;
+    border-radius: 8px;
+    outline: none;
+    background-color: #f2f2f2;
+    transition-duration: .3s;
+    font-size: 18px;
+    flex-grow: 4;
+    padding-left: 2rem;
+    height:2.5rem;
+}
+.navbar_bottom__input:hover{
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+}
+
+.navbar_bottom__list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    color: #333;
+    font-size:16px;
+    flex-grow: 6;
 }
