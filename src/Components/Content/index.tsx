@@ -2,15 +2,13 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import Store from '../../Store/store';
 import './content.css'
+import Item from "./Item/Item";
 
 const Content = (): JSX.Element => {
   return (
-    <div>
+    <div className='content'>
       {Store.items.map((item) => (
-        <div key={item} className='item'>
-          {item}
-          <br />
-        </div>
+            <Item text={item} key={item}/>
       ))}
     </div>
   );

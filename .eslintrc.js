@@ -12,5 +12,6 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    "@typescript-eslint/strict-boolean-expressions": 0
   },
 };

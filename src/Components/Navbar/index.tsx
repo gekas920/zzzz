@@ -11,13 +11,17 @@ const Navbar = (): JSX.Element => {
     const onKeyDown = useCallback((event: KeyboardEvent):void=>{
         if(event.key === 'Enter'){
             const input = document.getElementById('text-input') as HTMLInputElement;
-            Store.addItem(input.value);
-            input.value = '';
+            if(!Store.items.find(item => item === input.value) && input.value){
+                Store.addItem(input.value);
+                input.value = '';
+            }
         }
     },[value])
     useEffect(() => {
         const input = document.getElementById('text-input');
         input?.addEventListener("keydown", onKeyDown)
+        return ()=>
+            input?.removeEventListener("keydown",onKeyDown);
     },[])
   return (
     <div className="navbar">
@@ -27,7 +31,7 @@ const Navbar = (): JSX.Element => {
                 <span>Магазины</span>
                 <span>Покупателям</span>
                 <span>Юридическим лицам</span>
-                <span>Клуб DNS</span>
+                <span>Клуб ADIDAS</span>
             </div>
             <span className='navbar-top__phone'>8(800)555-35-35</span>
         </div>
