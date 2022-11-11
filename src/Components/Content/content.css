@@ -3,6 +3,6 @@
     height: 100vh;
     display: grid;
     width: 100%;
-    grid-template-columns: repeat(5, [col] 20% );
+    grid-template-columns: repeat(4, [col] 20% );
     grid-gap:3rem;
 }

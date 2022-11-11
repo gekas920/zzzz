@@ -1,23 +1,35 @@
 import { makeAutoObservable } from 'mobx';
 
+
+const getItem = (type:'cats'|'dogs'): string | null=> localStorage.getItem(type);
+
 class StoreClass {
-  private readonly hasItems = localStorage.getItem('items');
-  public items: string[] = this.hasItems ? JSON.parse(this.hasItems) : [];
+  public cats: string[] = getItem('cats') ? JSON.parse(getItem('cats') as string): []
+  public dogs: string[] = getItem('dogs') ? JSON.parse(getItem('dogs') as string): []
   constructor() {
     makeAutoObservable(this);
   }
 
-  public addItem(item: string): void {
-    const tempItems = [...this.items];
+  public addItem(item: string,type:'cats'|'dogs'): void {
+    const tempItems = type === 'cats' ? [...this.cats] : [...this.dogs];
     tempItems.push(item);
-    this.items = tempItems;
-    localStorage.setItem('items',JSON.stringify(tempItems));
+    if(type === 'cats'){
+      this.cats = tempItems;
+    } else {
+      this.dogs = tempItems;
+    }
+    localStorage.setItem(type,JSON.stringify(tempItems));
   }
 
-  public removeItem(item:string):void{
-    const tempItems = [...this.items].filter(tempItem=>tempItem!==item);
-    this.items = tempItems;
-    localStorage.setItem('items',JSON.stringify(tempItems));
+  public removeItem(item:string,type:'cats'|'dogs'):void{
+    const curItem = type === 'cats' ? [...this.cats] : [...this.dogs];
+    const tempItems = [...curItem].filter(tempItem=>tempItem!==item);
+    if(type === 'cats'){
+      this.cats = tempItems;
+    } else {
+      this.dogs = tempItems;
+    }
+    localStorage.setItem(type,JSON.stringify(tempItems));
   }
 }
 

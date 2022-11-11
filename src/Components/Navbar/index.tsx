@@ -1,18 +1,23 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import './navbar.css';
+import { Link } from "react-router-dom";
 import { observer } from 'mobx-react-lite';
+import './navbar.css';
 // @ts-expect-error
 import logo from '../../images/adidas-4-logo.png'
 import Store from "../../Store/store";
 
+const getRandomInt = (max:number):number => {
+    return Math.floor(Math.random() * max);
+}
 
 const Navbar = (): JSX.Element => {
     const [value,setValue] = useState('');
     const onKeyDown = useCallback((event: KeyboardEvent):void=>{
         if(event.key === 'Enter'){
             const input = document.getElementById('text-input') as HTMLInputElement;
-            if(!Store.items.find(item => item === input.value) && input.value){
-                Store.addItem(input.value);
+            const type = getRandomInt(2) ? 'cats' : 'dogs';
+            if(!Store[type].find(item => item === input.value) && input.value){
+                Store.addItem(input.value,type);
                 input.value = '';
             }
         }
@@ -41,10 +46,9 @@ const Navbar = (): JSX.Element => {
                    placeholder='Поиск по сайту'
                    onChange={(e)=>setValue(e.target.value)} />
             <div className='navbar_bottom__list'>
-                <span>Сравнить</span>
-                <span>Избранное</span>
-                <span>Корзина</span>
-                <span>Войти</span>
+                <Link to='/cats'>Кошки</Link>
+                <Link to='/dogs'>Собаки</Link>
+                <Link to='/'>Статика</Link>
             </div>
         </div>
     </div>

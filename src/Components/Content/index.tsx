@@ -4,11 +4,21 @@ import Store from '../../Store/store';
 import './content.css'
 import Item from "./Item/Item";
 
-const Content = (): JSX.Element => {
+
+interface ContentProps{
+  type:'cats'|'dogs'|'all',
+}
+
+const Content:React.FC<ContentProps> = ({type}): JSX.Element => {
+  if(type === 'all'){
+    return <div className='content'>
+      <img src='https://footwearnews.com/wp-content/uploads/2022/07/GettyImages-1023658.jpg?w=700&h=437&crop=1' alt={'adidas'}/>
+    </div>
+  }
   return (
     <div className='content'>
-      {Store.items.map((item) => (
-            <Item text={item} key={item}/>
+      {Store[type].map((item) => (
+            <Item text={item} key={item} type={type}/>
       ))}
     </div>
   );
